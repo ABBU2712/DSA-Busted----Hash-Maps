@@ -1,0 +1,21 @@
+#Given an array of length N that contains only integers, the task is to print the special numbers of array. A number in this array is called Special number if it is divisible by at least one other number in the array.
+
+#code
+from collections import defaultdict
+def special_number(arr):
+    arr.sort()
+    n = len(arr)
+    seta=set()
+    for i in range(n):
+        if arr[i] !=0:
+            for j in range(i+1,n):
+                if arr[j]%arr[i]==0:
+                    seta.add(arr[j])
+    print(seta)
+#Testing        
+arr = [ 2, 3, 8, 6, 9, 10]
+special_number(arr)
+
+#Output: {8, 9, 10, 6}
+
+ 
