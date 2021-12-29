@@ -1,0 +1,36 @@
+#Given an array of integers and a number k, write a function that returns true if the given array can be divided into pairs such that the sum of every pair is divisible by k.
+#Input: arr[] = {9, 7, 5, 3}, 
+#k = 6 
+#Output: True 
+#We can divide the array into (9, 3) and (7, 5). Sum of both of these pairs is a multiple of 6.
+
+from collections import defaultdict
+class Solution:
+	def canPair(self, nuns, k):
+		# Code here
+		n=len(nuns)
+		if len(nuns)%2 != 0:
+		    return False		
+		d = defaultdict(lambda:0)
+		for i in range(n):
+		    d[((nuns[i] % k) + k) % k] +=1
+		for i in range(0, n):
+		    rem = ((nuns[i] % k) + k) % k
+		    if (2 * rem == k):
+		        if (d[rem] % 2 != 0):
+		            return False
+ 
+        # If remainder is 0, then there
+        # must be two elements with 0 remainder
+            elif (rem == 0):
+                if d[rem]%2 !=0:
+                    return False
+ 
+            # Else number of occurrences of
+            # remainder must be equal to
+            # number of occurrences of
+            # k - remainder
+            elif (d[rem] != d[k - rem]):
+                return False
+ 
+        return True
